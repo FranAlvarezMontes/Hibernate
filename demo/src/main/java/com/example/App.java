@@ -40,25 +40,31 @@ public class App {
         Random rand = new Random();
         int aleatorio = rand.nextInt(1000) + 1; // Genera un número entre 1 y 100 (ambos inclusive)
 
+        /*
         Foo foo = new Foo();
         foo.id = aleatorio;
         foo.name = "Nombre1";
         foo.dni = "123456W";
         session.persist(foo);       //Guarda datos en la tabla
-        
+        */
         
         /* */
-        var fooModif = session.get(Foo.class, 44);
+        var fooDel = session.get(Foo.class, 822);
 
-        if (null != fooModif){
-            //fooModif.dni = "modifDNI2";
-            session.remove(fooModif);
-            session.persist(fooModif);
+        if (null != fooDel){
+            System.out.println("Vamos a borrar el registro");
+            session.remove(fooDel);
+        }
+        else{
+            System.out.println("No ha encontrado el registro a borrar");
         }
 
+        var fooMod = session.get(Foo.class, 832);
 
-
-
+        if (null != fooMod){
+            fooMod.dni = "modifDNI3";
+            session.persist(fooMod);
+        }
 
         tr.commit();
         session.close();            //Libera los objetos de la memoria de hibernate
